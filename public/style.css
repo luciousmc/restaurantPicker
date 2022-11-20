@@ -1,0 +1,14 @@
+body {
+  font-family: helvetica;
+}
+
+h1 {
+  color: red;
+  text-decoration: underline;
+}
+
+code {
+  background-color: #dedede;
+  padding: 5px;
+  border-radius: 5px;
+}
