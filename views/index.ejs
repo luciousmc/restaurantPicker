@@ -21,6 +21,29 @@
 
     <button data-random-btn class="getRestaurant">Get Random Restaurant</button>
 
+    <h2>Add A restaurant</h2>
+    <form method="POST" action="/restaurant">
+      <div>
+        <label for="restName">Name</label>
+        <input type="text" id="restName" name="name" />
+      </div>
+      <div>
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" />
+      </div>
+      <input type="submit" value="Add Restaurant" />
+    </form>
+
+    <hr />
+    <h2>List of Current Restaraunts</h2>
+    <% if (data.length < 1) {%>
+    <h3>There are no restaurants in the DB</h3>
+    <% } else { for( let i = 0; i < data.length; i++ ) { %>
+
+    <ul>
+      <li><%= data[i].name %></li>
+    </ul>
+    <% } %> <% } %>
     <script src="main.js"></script>
   </body>
 </html>
