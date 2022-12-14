@@ -42,8 +42,14 @@ MongoClient.connect(process.env.DB_URI, {
       });
   });
 
-  app.get('/restaurant', (req, res) => {
-    res.send('You picked a random restaurant');
+  app.get('/random', (req, res) => {
+    const restuarantList = restaurants
+      .find()
+      .toArray()
+      .then((restaurants) => {
+        const randomI = Math.ceil(Math.random() * restaurants.length);
+        res.status(200).json({ restaurant: restaurants[randomI] });
+      });
   });
 
   app.get('/restaurant/:category', (req, res) => {
