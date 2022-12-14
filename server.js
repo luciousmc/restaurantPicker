@@ -33,8 +33,12 @@ MongoClient.connect(process.env.DB_URI, {
   app.use(express.urlencoded({ extended: true }));
 
   app.get('/', (req, res) => {
-    const result = restaurants.find();
-    res.render('index.ejs', { data: result });
+    const result = restaurants
+      .find()
+      .toArray()
+      .then((data) => {
+        res.render('index.ejs', { data });
+      });
   });
 
   app.get('/restaurant', (req, res) => {
@@ -50,14 +54,15 @@ MongoClient.connect(process.env.DB_URI, {
   });
 
   app.post('/restaurant', (req, res) => {
-    const result = restaurants.insertOne(req.body);
-    console.log(`${req.body.name} added to the database`);
-    res.redirect('/');
+    const result = restaurants
+      .insertOne({ ...req.body, times_visited: 0 })
+      .then((result) => {
+        console.log(`${req.body.name} added to the database`);
+        res.redirect('/');
+      });
   });
 
   app.listen(PORT, () => {
     console.log('Server is listening on port', PORT);
   });
-
-  client.close();
 });
