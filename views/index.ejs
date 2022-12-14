@@ -31,6 +31,10 @@
         <label for="location">Location</label>
         <input type="text" id="location" name="location" />
       </div>
+      <div>
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" />
+      </div>
       <input type="submit" value="Add Restaurant" />
     </form>
 
@@ -41,7 +45,7 @@
     <% } else { for( let i = 0; i < data.length; i++ ) { %>
 
     <ul>
-      <li><%= data[i].name %></li>
+      <li><%= data[i].name %> in <%= data[i].location %></li>
     </ul>
     <% } %> <% } %>
     <script src="main.js"></script>
