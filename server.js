@@ -35,6 +35,7 @@ MongoClient.connect(process.env.DB_URI, {
   app.get('/', (req, res) => {
     const result = restaurants
       .find()
+      .sort({ name: 1 })
       .toArray()
       .then((data) => {
         res.render('index.ejs', { data });
